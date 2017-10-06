@@ -66,7 +66,7 @@ def current_player
 end
 def won?
   WIN_COMBINATIONS.each do |win_combos|
-    if position_taken?(@board, win_combos[0]) && @board[win_combos[0]] == @board[win_combos[1]] && @board[win_combos[1]] == @board[win_combos[2]]
+    if position_taken?(win_combos[0]) && @board[win_combos[0]] == @board[win_combos[1]] && @board[win_combos[1]] == @board[win_combos[2]]
       return win_combos
     else
     end
@@ -81,25 +81,25 @@ def full?
 end
 
 def draw?
-  full?(@board) && !won?(@board)
+  full? && !won?
 end
 
 def over?
-  draw?(@board) || full?(@board) || won?(@board)
+  draw? || full? || won?
 end
 
 def winner
-  if won?(@board)
-    @board[won?(@board)[0]]
+  if won?
+    @board[won?[0]]
   end
 end
 
 def play
-    until over?(@board)
-    turn(@board)
+    until over?
+    turn
   end
-  if won?(@board)
-    puts "Congratulations #{winner(@board)}!"
+  if won?
+    puts "Congratulations #{winner}!"
   else
     puts "Cat's Game!"
   end
